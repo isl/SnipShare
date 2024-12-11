@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discover Snips</title>
+  <link rel="stylesheet" href="discover.css">
+</head>
+
+<body>
+  <header class="header">
+    <a href="index.html" class="logo-link">
+      <img src="logo.png" alt="SnipShare Logo" class="logo">
+    </a>
+    <nav class="nav">
+      <button class="nav-button" onclick="location.href='index.html'">Home</button>
+
+      <button class="nav-button" onclick="location.href='discover.html'">Discover</button>
+
+      <button class="nav-button" id="darkModeToggle">Switch to Dark Mode</button>
+    </nav>
+
+  </header>
+
+  <main class="main">
+    <div class="discover-container">
+      <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search for a title or a tag...">
+        <button onclick="searchSnips()">Search</button>
+      </div>
+      <div id="resultsContainer"></div>
+
+
+      <h2>Discover Snips</h2>
+      <div id="snipsContainer" class="snips-container">
+        <!-- Snips will be dynamically injected here -->
+      </div>
+
+
+      <div id="snipsGrid" class="snips-grid"></div>
+    </div>
+  </main>
+
+  <script src="discover.js"></script>
+</body>
+
+</html>

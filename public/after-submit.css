@@ -1,0 +1,254 @@
+:root {
+    --background-color: #ffffff;
+    --text-color: #000000;
+}
+
+[data-theme="dark"] {
+    --background-color: #333333;
+    --text-color: #ffffff;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+[data-theme="dark"] .url-section,
+[data-theme="dark"] .code-section,
+[data-theme="dark"] .comment-section {
+    background-color: #f9f9f9; /* Light background */
+    color: #333; /* Dark text */
+    border: 1px solid #ddd; /* Light border */
+}
+
+[data-theme="light"] .url-section,
+[data-theme="light"] .code-section,
+[data-theme="light"] .comment-section {
+    background-color: #f9f9f9; /* Light background */
+    color: #333; /* Dark text */
+    border: 1px solid #ddd; /* Light border */
+}
+
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Header Section */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logo-link {
+    text-decoration: none;
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+    cursor: pointer;
+}
+
+.nav {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+}
+
+.nav-button {
+    padding: 8px 16px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Main Section */
+.main {
+    max-width: 1100px; /* Increased max width to accommodate larger code section */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Content Container */
+.content-container {
+    display: grid;
+    grid-template-rows: auto 1fr auto; /* Three distinct rows: top, middle, bottom */
+    gap: 20px;
+}
+/* Middle Section with 80/20 Split */
+.middle-section {
+    display: grid;
+    grid-template-columns: 4fr 1fr; /* Code section takes 80%, Comments take 20% */
+    gap: 20px;
+}
+.card {
+    grid-column: 1 / 2; /* Attached Files below Code Section, spans left column */
+}
+
+
+/* URL, Code, and Comment Sections */
+.url-section, .code-section, .comment-section {
+    background-color: #fafafa;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.url-section {
+    grid-column: 1 / -1; /* Spans the full width of the grid */
+}
+
+
+.url-section {
+    height: 180px; /* Adjusts height automatically to fit content */
+    padding: 00px; /* Ensure adequate padding */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.comment-section {
+    max-height: auto;
+    overflow-y: auto;
+    text-align: left;
+    padding: 10px;
+}
+
+/* Headings */
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.url-section h2, .code-section h2, .comment-section h2 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#uniqueUrl {
+    font-size: 18px;
+    margin: 10px 0;
+    word-wrap: break-word;
+}
+
+button {
+    padding: 8px 16px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Tags Container and Chips */
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+    padding: 5px;
+    border-top: 1px solid #ccc;
+}
+
+#tagsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.tag-chip {
+    background-color: #e0e0e0;
+    color: #333;
+    border-radius: 8px;
+    padding: 4px 8px;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Code Display Section */
+#codeDisplay {
+    text-align: left;
+    font-family: monospace;
+    white-space: pre-wrap;
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 8px;
+    max-height: 500px; /* Adjust height if necessary */
+    overflow-y: auto; /* Only vertical scrolling if content overflows */
+}
+
+/* Comment Section */
+#commentsContainer {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.comment {
+    text-align: left;
+    margin-bottom: 8px;
+    padding: 8px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .content-container {
+        grid-template-columns: 1fr; /* Stacks sections vertically on smaller screens */
+    }
+}
+/* Style for the smaller Export Code button above the code snippet */
+.small-export-button {
+    padding: 5px 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.small-export-button:hover {
+    background-color: #555;
+}
+
+#attachedFiles {
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+#attachedFiles img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+.comment {
+    text-align: left;
+    margin-bottom: 8px;
+    padding: 8px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment span {
+    margin-right: 5px;
+}

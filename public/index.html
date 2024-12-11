@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnipShare</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+    <!-- Header with Logo and Navigation -->
+    <header class="header">
+        <a href="index.html" class="logo-link">
+            <img src="logo.png" alt="SnipShare Logo" class="logo">
+        </a>
+        <nav class="nav">
+            <button class="nav-button" onclick="location.href='index.html'">Home</button>
+
+            <button class="nav-button" onclick="location.href='discover.html'">Discover</button>
+        </nav>
+
+        <button id="darkModeToggle">Switch to Dark Mode</button>
+
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="main">
+        <!-- Add this to the form section -->
+        <div class="input-group">
+            <label for="languageSelect">Choose Formatting:</label>
+            <select id="languageSelect">
+                <option value="plaintext">Plain Text</option>
+                <option value="javascript">JavaScript</option>
+                <option value="python">Python</option>
+                <option value="java">Java</option>
+                <option value="csharp">C#</option>
+                <option value="cpp">C++</option>
+                <option value="php">PHP</option>
+                <option value="typescript">TypeScript</option>
+                <option value="c">C</option>
+                <option value="ruby">Ruby</option>
+                <option value="swift">Swift</option>
+            </select>
+        </div>
+
+        <div class="input-section">
+            <textarea id="codeInput" class="input-box" placeholder="Paste your code here..."></textarea>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="titleInput">Title</label>
+                    <input type="text" id="titleInput" placeholder="Value">
+                </div>
+
+                <div class="input-group">
+                    <label for="tagsInput">Tags</label>
+                    <input type="text" id="tagsInput" placeholder="Search for a tag...">
+                    <button id="addTagButton" type="button" onclick="addTag()">Add Tag</button>
+                    <div id="tagsContainer" class="tags-container"></div> <!-- Container for tags -->
+                    <!-- Suggestions Container -->
+                    <div id="tagSuggestions" class="suggestions-container"></div>
+                </div>
+                <!-- Existing form in index.html -->
+                <div class="input-group">
+                    <label for="imageInput">Upload Image</label>
+                    <input type="file" id="imageInput" name="image">
+                </div>
+
+            </div>
+
+            <button class="submit-button" onclick="submitSnip()">Submit</button>
+        </div>
+
+        <!-- Card Section -->
+        <div class="card-container">
+            <div class="card">
+                <div class="card-title">CODE</div>
+                <div class="card-icon">💻</div>
+                <div class="card-description">Code whatever you want</div>
+            </div>
+            <div class="card">
+                <div class="card-title">SNIP</div>
+                <div class="card-icon">🔴</div>
+                <div class="card-description">Snip it anytime from anywhere</div>
+            </div>
+            <div class="card">
+                <div class="card-title">DISCUSS</div>
+                <div class="card-icon">💬</div>
+                <div class="card-description">Discuss with people from around the world</div>
+            </div>
+        </div>
+    </main>
+    <script src="submit.js" defer></script>
+</body>
+
+</html>

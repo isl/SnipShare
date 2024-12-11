@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnipShare - Code View</title>
+    <link rel="stylesheet" href="after-submit.css">
+
+    <!-- Highlight.js CSS for styling -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+    <!-- Highlight.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    <!-- Add language support files for Highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/cs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/cpp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/php.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/ruby.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/swift.min.js"></script>
+
+</head>
+
+<body>
+    <!-- Header with Logo and Navigation -->
+    <header class="header">
+        <a href="index.html" class="logo-link">
+            <img src="logo.png" alt="SnipShare Logo" class="logo">
+        </a>
+        <nav class="nav">
+            <button class="nav-button" onclick="location.href='index.html'">Home</button>
+
+            <button class="nav-button" onclick="location.href='discover.html'">Discover</button>
+        </nav>
+        <button id="darkModeToggle">Switch to Dark Mode</button>
+
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="main">
+        <div class="content-container">
+            <!-- URL Section -->
+            <div class="url-section">
+                <h2>URL</h2>
+                <p id="uniqueUrl">http://localhost:3000/after_submit.html?snip_id=24</p>
+                <button onclick="copyUrl()">COPY</button>
+                <div id="tagsContainer" class="tags-container">
+                    <p>Tags:</p>
+                    <div id="tagsList">Loading tags...</div>
+                </div>
+            </div>
+
+            <!-- Code Display Section -->
+            <div class="code-section">
+                <h2 id="codeTitle">Loading Title...</h2>
+                <button id="exportButton">Export Code</button>
+                <label for="languageSelect">Choose Formatting:</label>
+                <select id="languageSelect">
+                    <option value="plaintext">Plain Text</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="python">Python</option>
+                    <option value="java">Java</option>
+                    <option value="csharp">C#</option>
+                    <option value="cpp">C++</option>
+                    <option value="php">PHP</option>
+                    <option value="typescript">TypeScript</option>
+                    <option value="c">C</option>
+                    <option value="ruby">Ruby</option>
+                    <option value="swift">Swift</option>
+                </select>
+                <pre id="codeDisplay" class="line-numbers">
+                                    <code class="language-javascript">Loading code...</code>
+                                </pre>
+            </div>
+
+            <!-- Attached Files Section -->
+            <div class="attached-section">
+                <h2>Attached Files</h2>
+                <div id="attachedFiles">
+                    <p>No files attached.</p>
+                </div>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="comment-section">
+                <h2>Comments</h2>
+                <div id="commentsContainer">
+                    <!-- Dynamically load comments here -->
+                </div>
+                <input type="text" id="commentInput" placeholder="Add a comment...">
+                <button onclick="submitComment()">Submit</button>
+            </div>
+        </div>
+    </main>
+
+
+
+
+    <!-- JavaScript Files -->
+    <script src="after-submit.js"></script>
+
+
+</body>
+
+</html>
