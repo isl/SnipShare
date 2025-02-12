@@ -17,7 +17,7 @@ Before running the application it is required to configure:
 (a) the connection details for MySQL and 
 (b) the base URL of the application. 
 
-To configure the connection details for MySQL, edit the file server.js by editing the constant value `db` that 
+To configure the connection details for MySQL, edit the file [server.js](server.js) by editing the constant value `db` that 
 contains all the required connection details for MySQL. 
 More specifically, the following values are needed: 
 ```
@@ -29,6 +29,8 @@ const db=mysql.createConnection({
    port: 3306
 });
 ```
+
+Moreover, a series of resources 
 
 ### Configuration 
 
