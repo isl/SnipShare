@@ -1,4 +1,4 @@
-let baseUrl = '';
+let baseUrl = 'http://192.168.1.101:3000';
 
 // Load the base URL from config.json using Promises
 function loadConfig() {
@@ -29,26 +29,45 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Function to load snip data and display code, title, and language
 async function loadSnipData(snipId) {
     try {
+        console.log('Using baseUrl:', {baseUrl});
+        // Fetch snip data from the server
         const response = await fetch(`${baseUrl}/api/snips/${snipId}`);
+        if (!response.ok) throw new Error(`Failed to fetch snip data: ${response.statusText}`);
         const data = await response.json();
 
-        // Dynamically construct the URL with snip_id
-        const baseUrl = `${baseUrl}/after_submit.html`;
-        const fullUrl = `${baseUrl}?snip_id=${snipId}`;
+        // Construct the full URL dynamically using the base URL and snip_id
+        const fullUrl = `${baseUrl}`+`/after_submit.html?snip_id=${snipId}`;
 
         // Display the unique URL
-        document.getElementById('uniqueUrl').textContent = fullUrl;
+        const uniqueUrlElement = document.getElementById('uniqueUrl');
+        if (uniqueUrlElement) {
+            uniqueUrlElement.textContent = fullUrl;
+        } else {
+            console.error("Element with ID 'uniqueUrl' not found.");
+        }
 
         // Display the title of the snip
-        document.getElementById('codeTitle').textContent = data.title;
+        const codeTitleElement = document.getElementById('codeTitle');
+        if (codeTitleElement) {
+            codeTitleElement.textContent = data.title || 'No Title Provided';
+        } else {
+            console.error("Element with ID 'codeTitle' not found.");
+        }
 
         // Display the code
-        document.getElementById('codeDisplay').textContent = data.snip;
+        const codeDisplayElement = document.getElementById('codeDisplay');
+        if (codeDisplayElement) {
+            codeDisplayElement.textContent = data.snip || 'No Snip Content';
+        } else {
+            console.error("Element with ID 'codeDisplay' not found.");
+        }
 
         // Display the language (choose formatting)
         const languageSelect = document.getElementById('languageSelect');
         if (languageSelect) {
             languageSelect.value = data.language || 'plaintext'; // Set the selected language
+        } else {
+            console.error("Element with ID 'languageSelect' not found.");
         }
 
         // Load and display the tags associated with the snip
@@ -57,6 +76,7 @@ async function loadSnipData(snipId) {
         console.error("Error loading snip data:", error);
     }
 }
+
 
 
 

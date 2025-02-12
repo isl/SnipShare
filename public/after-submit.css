@@ -239,6 +239,16 @@ button {
     height: auto;
     margin-top: 10px;
 }
+#commentInput {
+    width: 100%; /* Make it span the full width */
+    height: 60px; /* Increase height for better usability */
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #000;
+    border-radius: 8px;
+    resize: none; /* Prevents resizing manually */
+}
+
 .comment {
     text-align: left;
     margin-bottom: 8px;

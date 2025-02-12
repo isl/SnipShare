@@ -1,14 +1,18 @@
+let baseUrl = 'http://192.168.1.101:3000';
 const express = require('express');
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');
 const multer = require('multer');
-const config = require('./config.json');
+const path = require('path');
+
 
 const upload = multer(); // Middleware to handle `multipart/form-data`
 
 const app = express();
 const PORT = 3000;  // Set the web server to run on port 3000
-
+const cors = require('cors');
+app.use(cors());
+app.use('/snipshare', express.static(path.join(__dirname, 'public')));
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
@@ -21,10 +25,10 @@ app.use((req, res, next) => {
 
 // Configure MySQL connection
 const db = mysql.createConnection({
-    host: 'db_host',
-    user: 'db_username',
-    password: 'db_password',
-    database: 'db_name',
+    host: 'localhost',
+    user: 'root',
+    password: 'Giorgos13!',
+    database: 'snip',
     port: 3306  // This is the MySQL port
 });
 
@@ -143,7 +147,7 @@ app.get('/api/snip/:id', (req, res) => {
     FROM Snip s
     LEFT JOIN SnipTag st ON s.snip_id = st.snip_id
     LEFT JOIN Tags t ON st.tag_id = t.tag_id
-    LEFT JOIN Images i ON s.snip_id = i.snip_id
+    LEFT JOIN images i ON s.snip_id = i.snip_id
     WHERE s.snip_id = ?
     GROUP BY s.snip_id;
     `;
@@ -177,9 +181,10 @@ app.get('/api/snip/:id', (req, res) => {
 
 
 // Start the Express server
-app.listen(PORT, () => {
-    console.log(`Server running at ${config.baseUrl}`);
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running at ${baseUrl}`);
 });
+
 
 // Endpoint to get all tags
 app.get('/api/tags', (req, res) => {
@@ -346,9 +351,3 @@ app.get('/api/tags/search', (req, res) => {
     });
 });
 
-app.get('/api/config', (req, res) => {
-    const config = {
-        baseUrl: "http://localhost:3000/after_submit.html"
-    };
-    res.json(config);
-});

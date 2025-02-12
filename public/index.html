@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SnipShare</title>
     <link rel="stylesheet" href="styles.css">
+    <base href="/snipshare/">
+
 
 </head>
 
@@ -28,32 +30,34 @@
     <!-- Main Content Section -->
     <main class="main">
         <!-- Add this to the form section -->
-        <div class="input-group">
-            <label for="languageSelect">Choose Formatting:</label>
-            <select id="languageSelect">
-                <option value="plaintext">Plain Text</option>
-                <option value="javascript">JavaScript</option>
-                <option value="python">Python</option>
-                <option value="java">Java</option>
-                <option value="csharp">C#</option>
-                <option value="cpp">C++</option>
-                <option value="php">PHP</option>
-                <option value="typescript">TypeScript</option>
-                <option value="c">C</option>
-                <option value="ruby">Ruby</option>
-                <option value="swift">Swift</option>
-            </select>
+        <div class="input-section">
+            <label for="titleInput" class="input-label">Title</label>
+            <input type="text" id="titleInput" placeholder="Value">
         </div>
+
+
 
         <div class="input-section">
             <textarea id="codeInput" class="input-box" placeholder="Paste your code here..."></textarea>
 
             <div class="input-row">
-                <div class="input-group">
-                    <label for="titleInput">Title</label>
-                    <input type="text" id="titleInput" placeholder="Value">
-                </div>
 
+                <div class="input-group">
+                    <label for="languageSelect">Choose Formatting:</label>
+                    <select id="languageSelect">
+                        <option value="plaintext">Plain Text</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="python">Python</option>
+                        <option value="java">Java</option>
+                        <option value="csharp">C#</option>
+                        <option value="cpp">C++</option>
+                        <option value="php">PHP</option>
+                        <option value="typescript">TypeScript</option>
+                        <option value="c">C</option>
+                        <option value="ruby">Ruby</option>
+                        <option value="swift">Swift</option>
+                    </select>
+                </div>
                 <div class="input-group">
                     <label for="tagsInput">Tags</label>
                     <input type="text" id="tagsInput" placeholder="Search for a tag...">

@@ -46,7 +46,7 @@
             <!-- URL Section -->
             <div class="url-section">
                 <h2>URL</h2>
-                <p id="uniqueUrl">http://localhost:3000/after_submit.html?snip_id=24</p>
+                <p id="uniqueUrl"></p>
                 <button onclick="copyUrl()">COPY</button>
                 <div id="tagsContainer" class="tags-container">
                     <p>Tags:</p>
@@ -81,7 +81,7 @@
             <div class="attached-section">
                 <h2>Attached Files</h2>
                 <div id="attachedFiles">
-                    <p>No files attached.</p>
+
                 </div>
             </div>
 
@@ -91,9 +91,10 @@
                 <div id="commentsContainer">
                     <!-- Dynamically load comments here -->
                 </div>
-                <input type="text" id="commentInput" placeholder="Add a comment...">
+                <textarea id="commentInput" placeholder="Add a comment..."></textarea>
                 <button onclick="submitComment()">Submit</button>
             </div>
+
         </div>
     </main>
 
