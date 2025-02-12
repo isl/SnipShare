@@ -12,10 +12,12 @@ The application requires the installation of a MySQL database that stores the co
 
 ## How to run 
 
-SnipShare can be executed as a standalone web application using NodeJs, or through Docker.
+SnipShare can be executed as a standalone web application using through Docker.
 Before running the application it is required to configure: 
 (a) the connection details for MySQL and 
 (b) the base URL of the application. 
+
+### Configuration 
 
 To configure the connection details for MySQL, edit the file [server.js](server.js) by editing the constant value `db` that 
 contains all the required connection details for MySQL. 
@@ -30,10 +32,21 @@ const db=mysql.createConnection({
 });
 ```
 
-Moreover, a series of resources 
-
-### Configuration 
-
-### Using NodeJs
+Moreover, a series of resources declaring the baseUrl of the application. 
+More specifically, `baseUrl' refers to the actual URL where SnipShare will be deployed. 
+It is declared in the following files
+- [config.js](config.js)
+- [server.js](server.js)
+- [public/after-submit.js](public/after-submit.js)
+- [public/config.js](public/config.js)
+- [public/discover.js](public/discover.js)
+- [public/submit.js](public/submit.js)
 
 ### Using Docker
+
+Build and execute the docker image/container by executing the following
+```
+docker compose up --build
+```
+
+The application should be available at `http://base_url:3000/snipshare`
