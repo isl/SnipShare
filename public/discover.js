@@ -1,19 +1,16 @@
-let baseUrl = 'http://192.168.1.101:3000';
+let baseUrl ;
 
 // Load the base URL from config.json using Promises
-function loadConfig() {
-    return fetch('config.json')
-        .then(response => {
-            if (!response.ok) throw new Error(`Error loading config: ${response.statusText}`);
-            return response.json();
-        })
-        .then(config => {
-            baseUrl = config.baseUrl;
-            console.log('Loaded baseUrl:', baseUrl);
-        })
-        .catch(error => {
-            console.error('Error loading config:', error);
-        });
+async function loadConfig() {
+    try {
+        const response = await fetch('/config.json'); // Ensure this file is accessible
+        if (!response.ok) throw new Error('Failed to load config');
+        const config = await response.json();
+        baseUrl = config.baseUrl;
+        console.log('Loaded baseUrl:', baseUrl);
+    } catch (error) {
+        console.error('Error loading config:', error);
+    }
 }
 
 

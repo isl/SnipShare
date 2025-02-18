@@ -1,4 +1,5 @@
-let baseUrl = 'http://192.168.1.101:3000';
+const { baseUrl } = require('./config');
+
 const express = require('express');
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');
@@ -27,7 +28,7 @@ app.use((req, res, next) => {
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: 'Giorgos13!',
     database: 'snip',
     port: 3306  // This is the MySQL port
 });

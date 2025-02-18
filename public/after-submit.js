@@ -1,22 +1,21 @@
-let baseUrl = 'http://192.168.1.101:3000';
+let baseUrl;
 
-// Load the base URL from config.json using Promises
-function loadConfig() {
-    return fetch('config.json')
-        .then(response => {
-            if (!response.ok) throw new Error(`Error loading config: ${response.statusText}`);
-            return response.json();
-        })
-        .then(config => {
-            baseUrl = config.baseUrl;
-            console.log('Loaded baseUrl:', baseUrl);
-        })
-        .catch(error => {
-            console.error('Error loading config:', error);
-        });
+async function loadConfig() {
+    try {
+        const response = await fetch('/config.json');
+        if (!response.ok) throw new Error('Failed to load config');
+        const config = await response.json();
+        baseUrl = config.baseUrl;
+        console.log('Loaded baseUrl:', baseUrl);
+    } catch (error) {
+        console.error('Error loading config:', error);
+    }
 }
+
+// Ensure the config is loaded before executing anything else
 document.addEventListener('DOMContentLoaded', async () => {
-    // Fetch and display the code, title, tags, and comments when the page loads
+    await loadConfig(); // Load config before making any API calls
+
     const urlParams = new URLSearchParams(window.location.search);
     const snipId = urlParams.get('snip_id');
 
@@ -26,19 +25,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-// Function to load snip data and display code, title, and language
+// Function to load snip data and display code, title, language, and tags
 async function loadSnipData(snipId) {
     try {
-        console.log('Using baseUrl:', {baseUrl});
-        // Fetch snip data from the server
+        console.log('Using baseUrl:', baseUrl);
         const response = await fetch(`${baseUrl}/api/snips/${snipId}`);
         if (!response.ok) throw new Error(`Failed to fetch snip data: ${response.statusText}`);
         const data = await response.json();
 
         // Construct the full URL dynamically using the base URL and snip_id
-        const fullUrl = `${baseUrl}`+`/after_submit.html?snip_id=${snipId}`;
-
-        // Display the unique URL
+        const fullUrl = `${baseUrl}/after_submit.html?snip_id=${snipId}`;
         const uniqueUrlElement = document.getElementById('uniqueUrl');
         if (uniqueUrlElement) {
             uniqueUrlElement.textContent = fullUrl;
@@ -54,20 +50,22 @@ async function loadSnipData(snipId) {
             console.error("Element with ID 'codeTitle' not found.");
         }
 
-        // Display the code
+        // Ensure proper code formatting inside <pre>
         const codeDisplayElement = document.getElementById('codeDisplay');
-        if (codeDisplayElement) {
-            codeDisplayElement.textContent = data.snip || 'No Snip Content';
-        } else {
-            console.error("Element with ID 'codeDisplay' not found.");
-        }
+        codeDisplayElement.innerHTML = ""; // Clear previous content
 
-        // Display the language (choose formatting)
+        const codeElement = document.createElement("code");
+        codeElement.className = `language-${data.language || "plaintext"}`;
+        codeElement.textContent = data.snip || "No Snip Content";
+        codeDisplayElement.appendChild(codeElement);
+
+        // Apply syntax highlighting
+        hljs.highlightElement(codeElement);
+
+        // Update language selection dropdown
         const languageSelect = document.getElementById('languageSelect');
         if (languageSelect) {
-            languageSelect.value = data.language || 'plaintext'; // Set the selected language
-        } else {
-            console.error("Element with ID 'languageSelect' not found.");
+            languageSelect.value = data.language || "plaintext";
         }
 
         // Load and display the tags associated with the snip
@@ -80,15 +78,44 @@ async function loadSnipData(snipId) {
 
 
 
-// Function to copy URL to clipboard
-function copyUrl() {
-    const url = document.getElementById('uniqueUrl').textContent;
-    navigator.clipboard.writeText(url).then(() => {
-        alert("URL copied to clipboard!");
-    }).catch(err => {
-        console.error("Error copying URL:", err);
-    });
+// Function to copy the URL to clipboard
+async function copyUrl() {
+    const uniqueUrlElement = document.getElementById('uniqueUrl');
+    if (!uniqueUrlElement) {
+        console.error("Element with ID 'uniqueUrl' not found.");
+        return;
+    }
+
+    const url = uniqueUrlElement.textContent.trim();
+    
+    if (!url) {
+        console.error("No URL found to copy.");
+        alert("Nothing to copy!");
+        return;
+    }
+
+    try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            // Use Clipboard API if available
+            await navigator.clipboard.writeText(url);
+            alert("URL copied to clipboard!");
+        } else {
+            // Fallback method: create a temporary input field
+            const tempInput = document.createElement("input");
+            document.body.appendChild(tempInput);
+            tempInput.value = url;
+            tempInput.select();
+            document.execCommand("copy"); // Deprecated but works as a fallback
+            document.body.removeChild(tempInput);
+            alert("URL copied to clipboard!");
+        }
+    } catch (error) {
+        console.error("Error copying URL:", error);
+        alert("Failed to copy URL.");
+    }
 }
+
+
 
 // Function to load tags and display them under the URL section
 async function loadTags(snipId) {
