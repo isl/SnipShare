@@ -36,11 +36,7 @@ Moreover, a series of resources declaring the baseUrl of the application.
 More specifically, `baseUrl' refers to the actual URL where SnipShare will be deployed. 
 It is declared in the following files
 - [config.js](config.js)
-- [server.js](server.js)
-- [public/after-submit.js](public/after-submit.js)
-- [public/config.js](public/config.js)
-- [public/discover.js](public/discover.js)
-- [public/submit.js](public/submit.js)
+- [public/config.js](public/config.json)
 
 ### Using Docker
 
